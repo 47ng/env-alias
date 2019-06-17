@@ -41,6 +41,18 @@ describe('injectAlias', () => {
     envAlias.injectAlias(env, alias)
     expect(env).toHaveProperty('DEST_FOO', 'foo')
   })
+  test('it does not override an existing destination variable', () => {
+    const env = {
+      SOURCE_FOO: 'foo',
+      DEST_FOO: 'will-not-be-erased'
+    }
+    const alias: envAlias.Alias = {
+      sourceName: 'SOURCE_FOO',
+      destName: 'DEST_FOO'
+    }
+    envAlias.injectAlias(env, alias)
+    expect(env.DEST_FOO).toEqual('will-not-be-erased')
+  })
 })
 
 describe('createRunner', () => {

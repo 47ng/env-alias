@@ -94,3 +94,19 @@ console.log(aliases)
   }
 ]
 ```
+
+## Order of precedence
+
+If a variable with the destination name is set, `env-alias` will not
+overwrite it. This allows overriding aliased definitions by explicitly
+setting the target variable:
+
+```zsh
+APP_NAME="foo"
+
+MY_APP_NAME="bar"
+
+ENV_ALIAS_MY_APP_NAME="APP_NAME"
+
+# MY_APP_NAME will be "bar"
+```

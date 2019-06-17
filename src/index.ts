@@ -31,6 +31,9 @@ export const extractAliasingDeclarations = (
 }
 
 export const injectAlias = (env: NodeJS.ProcessEnv, alias: Alias) => {
+  if (env[alias.destName] !== undefined) {
+    return // don't overwrite existing destination variables
+  }
   env[alias.destName] = env[alias.sourceName]
 }
 
