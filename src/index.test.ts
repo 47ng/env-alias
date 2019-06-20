@@ -63,9 +63,8 @@ describe('createRunner', () => {
     }
     const run = envAlias.createRunner(env)
     const received = run()
-    expect(received).toEqual([
-      { destName: 'DEST', sourceName: 'SOURCE', value: 'value' }
-    ])
+    expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
+    expect(env).toHaveProperty('DEST', 'value')
   })
   test('custom prefix', () => {
     const env = {
@@ -74,9 +73,8 @@ describe('createRunner', () => {
     }
     const run = envAlias.createRunner(env)
     const received = run({ prefix: 'PREFIX_' })
-    expect(received).toEqual([
-      { destName: 'DEST', sourceName: 'SOURCE', value: 'value' }
-    ])
+    expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
+    expect(env).toHaveProperty('DEST', 'value')
   })
   test('undefined source has undefined value', () => {
     const env = {
@@ -85,7 +83,8 @@ describe('createRunner', () => {
     }
     const run = envAlias.createRunner(env)
     const received = run({ prefix: 'PREFIX_' })
-    expect(received[0].value).toBeUndefined()
+    expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
+    expect(env).toHaveProperty('DEST', undefined)
   })
   test('missing source has undefined value', () => {
     const env = {
@@ -93,6 +92,7 @@ describe('createRunner', () => {
     }
     const run = envAlias.createRunner(env)
     const received = run({ prefix: 'PREFIX_' })
-    expect(received[0].value).toBeUndefined()
+    expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
+    expect(env).toHaveProperty('DEST', undefined)
   })
 })

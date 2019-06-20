@@ -7,10 +7,6 @@ export interface Alias {
   destName: string
 }
 
-export interface AliasWithValue extends Alias {
-  value: string | undefined
-}
-
 const defaultOptions: Options = {
   prefix: 'ENV_ALIAS_'
 }
@@ -39,13 +35,10 @@ export const injectAlias = (env: NodeJS.ProcessEnv, alias: Alias) => {
 
 export const createRunner = (env: NodeJS.ProcessEnv) => (
   options: Options = defaultOptions
-): AliasWithValue[] => {
+): Alias[] => {
   const aliases = extractAliasingDeclarations(env, options)
   aliases.forEach(alias => injectAlias(env, alias))
-  return aliases.map(alias => ({
-    ...alias,
-    value: env[alias.destName]
-  }))
+  return aliases
 }
 
 export default createRunner(process.env)
