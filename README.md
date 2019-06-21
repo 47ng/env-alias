@@ -89,13 +89,11 @@ console.log(aliases)
 [
   {
     "sourceName": "PROVIDER_GIT_COMMIT_ID",
-    "destName": "MY_GIT_SHA1",
-    "value": "01256789abcdef"
+    "destName": "MY_GIT_SHA1"
   },
   {
     "sourceName": "PROVIDER_DEPLOYMENT_ID",
-    "destName": "MY_DEPLOYMENT_ID",
-    "value": "staging-001"
+    "destName": "MY_DEPLOYMENT_ID"
   }
 ]
 ```
