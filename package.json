@@ -1,6 +1,7 @@
 {
   "name": "env-alias",
   "version": "0.3.0",
+  "description": "Define aliases for environment variables and bind them at runtime",
   "main": "dist/index.js",
   "license": "MIT",
   "author": {
