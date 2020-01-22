@@ -1,7 +1,9 @@
 # ♊ `env-alias`
 
+[![NPM](https://img.shields.io/npm/v/env-alias?color=red)](https://www.npmjs.com/package/env-alias)
 [![MIT License](https://img.shields.io/github/license/47ng/env-alias.svg?color=blue)](https://github.com/47ng/env-alias/blob/master/LICENSE)
 [![Travis CI Build](https://img.shields.io/travis/com/47ng/env-alias.svg)](https://travis-ci.com/47ng/env-alias)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=47ng/env-alias)](https://dependabot.com)
 [![Average issue resolution time](https://isitmaintained.com/badge/resolution/47ng/env-alias.svg)](https://isitmaintained.com/project/47ng/env-alias)
 [![Number of open issues](https://isitmaintained.com/badge/open/47ng/env-alias.svg)](https://isitmaintained.com/project/47ng/env-alias)
 
