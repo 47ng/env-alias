@@ -33,7 +33,7 @@
     "ci": "run-s test build size"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^2.2.2",
+    "@size-limit/preset-small-lib": "^3.0.0",
     "@types/jest": "^25.1.0",
     "@types/node": "^13.1.2",
     "husky": "^4.2.1",
