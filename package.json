@@ -1,6 +1,6 @@
 {
   "name": "env-alias",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "Define aliases for environment variables and bind them at runtime",
   "main": "dist/index.js",
   "license": "MIT",
@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "nodemon -e ts,.env -w .env -w . -x 'run-s test build'",
-    "test": "jest --verbose",
+    "test": "jest --coverage",
     "build:clean": "rm -rf ./dist",
     "build:ts": "tsc",
     "build": "run-s build:clean build:ts",
@@ -33,16 +33,28 @@
     "ci": "run-s test build size"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^3.0.0",
-    "@types/jest": "^25.1.0",
-    "@types/node": "^13.1.2",
-    "husky": "^4.2.1",
-    "jest": "^25.1.0",
-    "nodemon": "^2.0.2",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@size-limit/preset-small-lib": "^4.4.5",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
+    "commitlint": "^8.3.5",
+    "husky": "^4.2.5",
+    "jest": "^25.4.0",
+    "nodemon": "^2.0.3",
     "npm-run-all": "^4.1.5",
-    "ts-jest": "^25.1.0",
-    "ts-node": "^8.5.4",
-    "typescript": "^3.7.3"
+    "size-limit": "^4.4.5",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  },
+  "nodemon": {
+    "verbose": false,
+    "execMap": {
+      "ts": "ts-node"
+    },
+    "ignore": [
+      "./dist"
+    ]
   },
   "size-limit": [
     {
@@ -51,12 +63,56 @@
     }
   ],
   "jest": {
+    "verbose": true,
     "preset": "ts-jest/presets/js-with-ts",
     "testEnvironment": "node"
   },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
   "husky": {
     "hooks": {
-      "pre-push": "yarn ci"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "chore",
+          "ci",
+          "clean",
+          "doc",
+          "feat",
+          "fix",
+          "perf",
+          "ref",
+          "revert",
+          "style",
+          "test"
+        ]
+      ],
+      "subject-case": [
+        0,
+        "always",
+        "sentence-case"
+      ],
+      "body-leading-blank": [
+        2,
+        "always",
+        true
+      ]
     }
   }
 }
