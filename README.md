@@ -114,3 +114,7 @@ ENV_ALIAS_MY_APP_NAME="APP_NAME"
 
 # MY_APP_NAME will be "bar"
 ```
+
+## License
+
+[MIT](https://github.com/47ng/env-alias/blob/master/LICENSE) - Made with ❤️ by [François Best](https://francoisbest.com) - [Donations welcome](https://paypal.me/francoisbest?locale.x=fr_FR) 🙏
