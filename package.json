@@ -30,7 +30,8 @@
     "build:ts": "tsc",
     "build": "run-s build:clean build:ts",
     "size": "size-limit",
-    "ci": "run-s test build size"
+    "ci": "run-s test build size",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.1.0",
