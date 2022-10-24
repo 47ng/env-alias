@@ -1,12 +1,17 @@
-# ♊ `env-alias`
+<h1 align="center">♊ <code>env-alias</code></h1>
+
+<div align="center">
 
 [![NPM](https://img.shields.io/npm/v/env-alias?color=red)](https://www.npmjs.com/package/env-alias)
-[![MIT License](https://img.shields.io/github/license/47ng/env-alias.svg?color=blue)](https://github.com/47ng/env-alias/blob/master/LICENSE)
-[![Continuous Integration](https://github.com/47ng/env-alias/workflows/Continuous%20Integration/badge.svg?branch=next)](https://github.com/47ng/env-alias/actions)
+[![MIT License](https://img.shields.io/github/license/47ng/env-alias.svg?color=blue)](https://github.com/47ng/env-alias/blob/next/LICENSE)
+[![CI/CD](https://github.com/47ng/env-alias/workflows/CI%2FCD/badge.svg?branch=next)](https://github.com/47ng/env-alias/actions)
 [![Coverage Status](https://coveralls.io/repos/github/47ng/env-alias/badge.svg?branch=next)](https://coveralls.io/github/47ng/env-alias?branch=next)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=47ng/env-alias)](https://dependabot.com)
 
-Define aliases for environment variables and bind them at runtime.
+</div>
+
+<p align="center">
+  Define aliases for environment variables and bind them at runtime.
+</p>
 
 ## Rationale
 
