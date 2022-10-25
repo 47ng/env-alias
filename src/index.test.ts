@@ -1,10 +1,16 @@
-import * as envAlias from './index'
+import {
+  Alias,
+  Options,
+  _createEnvAliaser,
+  _extractAliasingDeclarations,
+  _injectAlias
+} from './index'
 
-describe('extractAliasingDeclarations', () => {
+describe('_extractAliasingDeclarations', () => {
   test('no aliases', () => {
     const env = {}
     const options = { prefix: '' }
-    const received = envAlias.extractAliasingDeclarations(env, options)
+    const received = _extractAliasingDeclarations(env, options)
     expect(received).toEqual([])
   })
   test('find aliases', () => {
@@ -13,7 +19,7 @@ describe('extractAliasingDeclarations', () => {
       PREFIX_DEST_BAR: 'SOURCE_BAR'
     }
     const options = { prefix: 'PREFIX_' }
-    const received = envAlias.extractAliasingDeclarations(env, options)
+    const received = _extractAliasingDeclarations(env, options)
     expect(received).toEqual([
       { sourceName: 'SOURCE_FOO', destName: 'DEST_FOO' },
       { sourceName: 'SOURCE_BAR', destName: 'DEST_BAR' }
@@ -23,22 +29,22 @@ describe('extractAliasingDeclarations', () => {
     const env = {
       PREFIX_DEST_FOO: undefined
     }
-    const options: envAlias.Options = { prefix: 'PREFIX_' }
-    const received = envAlias.extractAliasingDeclarations(env, options)
+    const options: Options = { prefix: 'PREFIX_' }
+    const received = _extractAliasingDeclarations(env, options)
     expect(received).toEqual([])
   })
 })
 
-describe('injectAlias', () => {
+describe('_injectAlias', () => {
   test('it goes in the right direction', () => {
     const env = {
       SOURCE_FOO: 'foo'
     }
-    const alias: envAlias.Alias = {
+    const alias: Alias = {
       sourceName: 'SOURCE_FOO',
       destName: 'DEST_FOO'
     }
-    envAlias.injectAlias(env, alias)
+    _injectAlias(env, alias)
     expect(env).toHaveProperty('DEST_FOO', 'foo')
   })
   test('it does not override an existing destination variable', () => {
@@ -46,22 +52,22 @@ describe('injectAlias', () => {
       SOURCE_FOO: 'foo',
       DEST_FOO: 'will-not-be-erased'
     }
-    const alias: envAlias.Alias = {
+    const alias: Alias = {
       sourceName: 'SOURCE_FOO',
       destName: 'DEST_FOO'
     }
-    envAlias.injectAlias(env, alias)
+    _injectAlias(env, alias)
     expect(env.DEST_FOO).toEqual('will-not-be-erased')
   })
 })
 
-describe('createRunner', () => {
+describe('_createEnvAliaser', () => {
   test('default configuration', () => {
     const env = {
       SOURCE: 'value',
       ENV_ALIAS_DEST: 'SOURCE'
     }
-    const run = envAlias.createRunner(env)
+    const run = _createEnvAliaser(env)
     const received = run()
     expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
     expect(env).toHaveProperty('DEST', 'value')
@@ -71,7 +77,7 @@ describe('createRunner', () => {
       SOURCE: 'value',
       PREFIX_DEST: 'SOURCE'
     }
-    const run = envAlias.createRunner(env)
+    const run = _createEnvAliaser(env)
     const received = run({ prefix: 'PREFIX_' })
     expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
     expect(env).toHaveProperty('DEST', 'value')
@@ -81,7 +87,7 @@ describe('createRunner', () => {
       SOURCE: undefined,
       PREFIX_DEST: 'SOURCE'
     }
-    const run = envAlias.createRunner(env)
+    const run = _createEnvAliaser(env)
     const received = run({ prefix: 'PREFIX_' })
     expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
     expect(env).toHaveProperty('DEST', undefined)
@@ -90,7 +96,7 @@ describe('createRunner', () => {
     const env = {
       PREFIX_DEST: 'SOURCE'
     }
-    const run = envAlias.createRunner(env)
+    const run = _createEnvAliaser(env)
     const received = run({ prefix: 'PREFIX_' })
     expect(received).toEqual([{ destName: 'DEST', sourceName: 'SOURCE' }])
     expect(env).toHaveProperty('DEST', undefined)

@@ -4,8 +4,7 @@
     "target": "es2018",
     "lib": ["DOM"],
     "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
+    "noEmit": true,
     "rootDir": "./src",
     "esModuleInterop": true,
 

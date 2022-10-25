@@ -13,7 +13,10 @@ const defaultOptions: Options = {
 
 // --
 
-export const extractAliasingDeclarations = (
+/**
+ * @internal Exported for tests only
+ */
+export const _extractAliasingDeclarations = (
   env: NodeJS.ProcessEnv,
   options: Options
 ): Alias[] => {
@@ -26,19 +29,25 @@ export const extractAliasingDeclarations = (
     })
 }
 
-export const injectAlias = (env: NodeJS.ProcessEnv, alias: Alias) => {
+/**
+ * @internal Exported for tests only
+ */
+export const _injectAlias = (env: NodeJS.ProcessEnv, alias: Alias) => {
   if (env[alias.destName] !== undefined) {
     return // don't overwrite existing destination variables
   }
   env[alias.destName] = env[alias.sourceName]
 }
 
-export const createRunner = (env: NodeJS.ProcessEnv) => (
-  options: Options = defaultOptions
-): Alias[] => {
-  const aliases = extractAliasingDeclarations(env, options)
-  aliases.forEach(alias => injectAlias(env, alias))
-  return aliases
-}
+/**
+ * @internal Exported for tests only
+ */
+export const _createEnvAliaser =
+  (env: NodeJS.ProcessEnv) =>
+  (options: Options = defaultOptions): Alias[] => {
+    const aliases = _extractAliasingDeclarations(env, options)
+    aliases.forEach(alias => _injectAlias(env, alias))
+    return aliases
+  }
 
-export default createRunner(process.env)
+export const envAlias = _createEnvAliaser(process.env)

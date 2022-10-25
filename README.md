@@ -59,7 +59,7 @@ ENV_ALIAS_MY_DEPLOYMENT_ID='PROVIDER_DEPLOYMENT_ID'
 Then in your code:
 
 ```ts
-import envAlias from 'env-alias'
+import { envAlias } from 'env-alias'
 
 envAlias({
   aliasPrefix: 'ENV_ALIAS_' // default prefix
@@ -85,7 +85,7 @@ properties:
 `envAlias` will return the list of aliases it has found and processed:
 
 ```ts
-import envAlias from 'env-alias'
+import { envAlias } from 'env-alias'
 
 const aliases = envAlias()
 console.log(aliases)
